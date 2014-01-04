@@ -1,6 +1,6 @@
 #
 # Conditional build:
-%bcond_with	nvidia	# NVidia sensors (BR: libXNVCtrl-devel)
+%bcond_without	nvidia	# NVidia sensors
 #
 Summary:	MATE Sensors Applet
 Summary(pl.UTF-8):	MATE Sensors Applet - aplet z czujnikami dla środowiska MATE
@@ -21,6 +21,7 @@ BuildRequires:	gettext-devel >= 0.10.40
 BuildRequires:	glib2-devel >= 1:2.26.0
 BuildRequires:	gtk+2-devel >= 2:2.14.0
 BuildRequires:	intltool >= 0.35.0
+%{?with_nvidia:BuildRequires:	libXNVCtrl-devel}
 BuildRequires:	libatasmart-devel >= 0.16
 BuildRequires:	libnotify-devel >= 0.7.0
 BuildRequires:	libtool >= 1:1.4.3
