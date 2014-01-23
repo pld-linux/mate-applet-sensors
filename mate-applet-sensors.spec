@@ -6,7 +6,7 @@ Summary:	MATE Sensors Applet
 Summary(pl.UTF-8):	MATE Sensors Applet - aplet z czujnikami dla środowiska MATE
 Name:		mate-applet-sensors
 Version:	1.6.1
-Release:	2
+Release:	3
 License:	GPL v2+
 Group:		X11/Applications
 Source0:	http://pub.mate-desktop.org/releases/1.6/mate-sensors-applet-%{version}.tar.xz
@@ -219,7 +219,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_iconsdir}/hicolor/*x*/devices/mate-sensors-applet-*.png
 %{_pixmapsdir}/mate-sensors-applet
 
-%ifnarch i586 i686 athlon pentium3 pentium4 %{x8664}
+%ifnarch i386 i486
 %files plugin-aticonfig
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/mate-sensors-applet/plugins/libaticonfig.so
