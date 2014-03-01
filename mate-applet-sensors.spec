@@ -1,12 +1,12 @@
 #
 # Conditional build:
 %bcond_without	nvidia	# NVidia sensors
-#
+
 Summary:	MATE Sensors Applet
 Summary(pl.UTF-8):	MATE Sensors Applet - aplet z czujnikami dla środowiska MATE
 Name:		mate-applet-sensors
 Version:	1.6.1
-Release:	3
+Release:	4
 License:	GPL v2+
 Group:		X11/Applications
 Source0:	http://pub.mate-desktop.org/releases/1.6/mate-sensors-applet-%{version}.tar.xz
@@ -134,7 +134,7 @@ odczytanych z ATA S.M.A.R.T. poprzez UDisks.
 Summary:	MATE Sensors Applet library
 Summary(pl.UTF-8):	Biblioteka MATE Sensors Applet
 Group:		Libraries
-Requires:	glib2-devel >= 1:2.26.0
+Requires:	glib2 >= 1:2.26.0
 
 %description libs
 MATE Sensors Applet library.
