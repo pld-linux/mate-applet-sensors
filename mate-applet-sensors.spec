@@ -5,12 +5,12 @@
 Summary:	MATE Sensors Applet
 Summary(pl.UTF-8):	MATE Sensors Applet - aplet z czujnikami dla środowiska MATE
 Name:		mate-applet-sensors
-Version:	1.6.1
-Release:	4
+Version:	1.8.0
+Release:	1
 License:	GPL v2+
 Group:		X11/Applications
-Source0:	http://pub.mate-desktop.org/releases/1.6/mate-sensors-applet-%{version}.tar.xz
-# Source0-md5:	64ee9b5f930ff6edfb7ae9ece9b52ba0
+Source0:	http://pub.mate-desktop.org/releases/1.8/mate-sensors-applet-%{version}.tar.xz
+# Source0-md5:	42c851501d498db2fa838e85803b3805
 Patch0:		%{name}-udisks.patch
 URL:		https://github.com/mate-desktop/mate-sensors-applet
 BuildRequires:	autoconf >= 2.53
@@ -28,13 +28,13 @@ BuildRequires:	libtool >= 1:1.4.3
 BuildRequires:	libxslt-progs
 BuildRequires:	lm_sensors-devel
 BuildRequires:	mate-common
-BuildRequires:	mate-doc-utils
 BuildRequires:	mate-panel-devel >= 1.1.0
 BuildRequires:	pkgconfig >= 1:0.19
 BuildRequires:	rpmbuild(find_lang) >= 1.36
 BuildRequires:	rpmbuild(macros) >= 1.592
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
+BuildRequires:	yelp-tools
 Requires(post,postun):	gtk-update-icon-cache
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	cairo >= 1.0.4
@@ -182,6 +182,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/lib*.la
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/mate-sensors-applet/plugins/*.la
+
+%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/cmn
 
 %find_lang mate-sensors-applet --with-mate
 
