@@ -2,6 +2,9 @@
 # Conditional build:
 %bcond_without	nvidia	# NVidia sensors
 
+%ifnarch %{ix86} %{x8664}
+%undefine	with_nvidia
+%endif
 Summary:	MATE Sensors Applet
 Summary(pl.UTF-8):	MATE Sensors Applet - aplet z czujnikami dla środowiska MATE
 Name:		mate-applet-sensors
@@ -33,6 +36,7 @@ BuildRequires:	pkgconfig >= 1:0.19
 BuildRequires:	rpmbuild(find_lang) >= 1.36
 BuildRequires:	rpmbuild(macros) >= 1.592
 BuildRequires:	tar >= 1:1.22
+BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	xz
 BuildRequires:	yelp-tools
 Requires(post,postun):	gtk-update-icon-cache
@@ -183,8 +187,6 @@ rm -rf $RPM_BUILD_ROOT
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/lib*.la
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/mate-sensors-applet/plugins/*.la
 
-%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/cmn
-
 %find_lang mate-sensors-applet --with-mate
 
 %clean
@@ -221,7 +223,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_iconsdir}/hicolor/*x*/devices/mate-sensors-applet-*.png
 %{_pixmapsdir}/mate-sensors-applet
 
-%ifnarch i386 i486
+%ifarch i586 i686 athlon pentium2 pentium3 pentium4 %{x8664}
 %files plugin-aticonfig
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/mate-sensors-applet/plugins/libaticonfig.so
