@@ -1,5 +1,6 @@
 #
 # Conditional build:
+%bcond_with	gtk3	# use GTK+ 3.x instead of 2.x
 %bcond_without	nvidia	# NVidia sensors
 
 %ifnarch %{ix86} %{x8664}
@@ -8,21 +9,21 @@
 Summary:	MATE Sensors Applet
 Summary(pl.UTF-8):	MATE Sensors Applet - aplet z czujnikami dla środowiska MATE
 Name:		mate-applet-sensors
-Version:	1.8.0
-Release:	2
+Version:	1.10.0
+Release:	1
 License:	GPL v2+
 Group:		X11/Applications
-Source0:	http://pub.mate-desktop.org/releases/1.8/mate-sensors-applet-%{version}.tar.xz
-# Source0-md5:	42c851501d498db2fa838e85803b3805
-Patch0:		%{name}-udisks.patch
+Source0:	http://pub.mate-desktop.org/releases/1.10/mate-sensors-applet-%{version}.tar.xz
+# Source0-md5:	e7ed80bd29ae64ff404c29dc9095158d
 URL:		https://github.com/mate-desktop/mate-sensors-applet
 BuildRequires:	autoconf >= 2.53
 BuildRequires:	automake >= 1:1.9
 BuildRequires:	cairo-devel >= 1.0.4
 BuildRequires:	dbus-glib-devel >= 0.80
 BuildRequires:	gettext-tools >= 0.10.40
-BuildRequires:	glib2-devel >= 1:2.26.0
-BuildRequires:	gtk+2-devel >= 2:2.14.0
+BuildRequires:	glib2-devel >= 1:2.36.0
+%{!?with_gtk3:BuildRequires:	gtk+2-devel >= 2:2.24.0}
+%{?with_gtk3:BuildRequires:	gtk+3-devel >= 3.0.0}
 BuildRequires:	intltool >= 0.35.0
 %{?with_nvidia:BuildRequires:	libXNVCtrl-devel}
 BuildRequires:	libatasmart-devel >= 0.16
@@ -42,7 +43,8 @@ BuildRequires:	yelp-tools
 Requires(post,postun):	gtk-update-icon-cache
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	cairo >= 1.0.4
-Requires:	gtk+2 >= 2:2.14.0
+%{!?with_gtk3:Requires:	gtk+2 >= 2:2.24.0}
+%{?with_gtk3:Requires:	gtk+3 >= 3.0.0}
 Requires:	hicolor-icon-theme
 Requires:	libnotify >= 0.7.0
 Requires:	mate-panel >= 1.1.0
@@ -138,7 +140,7 @@ odczytanych z ATA S.M.A.R.T. poprzez UDisks.
 Summary:	MATE Sensors Applet library
 Summary(pl.UTF-8):	Biblioteka MATE Sensors Applet
 Group:		Libraries
-Requires:	glib2 >= 1:2.26.0
+Requires:	glib2 >= 1:2.36.0
 
 %description libs
 MATE Sensors Applet library.
@@ -151,7 +153,7 @@ Summary:	Header files for MATE Sensors Applet plugins development
 Summary(pl.UTF-8):	Pliki nagłówkowe do tworzenia wtyczek apletu MATE Sensors
 Group:		Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
-Requires:	glib2-devel >= 1:2.26.0
+Requires:	glib2-devel >= 1:2.36.0
 
 %description devel
 Header files for MATE Sensors Applet plugins development.
@@ -161,7 +163,6 @@ Pliki nagłówkowe do tworzenia wtyczek apletu MATE Sensors.
 
 %prep
 %setup -q -n mate-sensors-applet-%{version}
-%patch0 -p1
 
 %build
 %{__intltoolize}
@@ -174,6 +175,7 @@ Pliki nagłówkowe do tworzenia wtyczek apletu MATE Sensors.
 	--disable-silent-rules \
 	--disable-static \
 	--with-aticonfig=/usr/bin/aticonfig \
+	%{?with_gtk3:--with-gtk=3.0} \
 	%{!?with_nvidia:--without-nvidia}
 
 %{__make}
