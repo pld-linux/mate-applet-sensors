@@ -9,12 +9,12 @@
 Summary:	MATE Sensors Applet
 Summary(pl.UTF-8):	MATE Sensors Applet - aplet z czujnikami dla środowiska MATE
 Name:		mate-applet-sensors
-Version:	1.10.4
+Version:	1.12.0
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications
-Source0:	http://pub.mate-desktop.org/releases/1.10/mate-sensors-applet-%{version}.tar.xz
-# Source0-md5:	75d115290688ed87ff07931406c493a5
+Source0:	http://pub.mate-desktop.org/releases/1.12/mate-sensors-applet-%{version}.tar.xz
+# Source0-md5:	5bd2118d8e8ec27c756f32b1e2dea8af
 URL:		https://github.com/mate-desktop/mate-sensors-applet
 BuildRequires:	autoconf >= 2.53
 BuildRequires:	automake >= 1:1.9
@@ -24,7 +24,7 @@ BuildRequires:	gettext-tools >= 0.10.40
 BuildRequires:	glib2-devel >= 1:2.36.0
 %{!?with_gtk3:BuildRequires:	gtk+2-devel >= 2:2.24.0}
 %{?with_gtk3:BuildRequires:	gtk+3-devel >= 3.0.0}
-BuildRequires:	intltool >= 0.35.0
+BuildRequires:	intltool >= 0.50.1
 %{?with_nvidia:BuildRequires:	libXNVCtrl-devel}
 BuildRequires:	libatasmart-devel >= 0.16
 BuildRequires:	libnotify-devel >= 0.7.0
@@ -212,6 +212,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/mate-sensors-applet/plugins/libeee.so
 %attr(755,root,root) %{_libdir}/mate-sensors-applet/plugins/libi8k.so
 %attr(755,root,root) %{_libdir}/mate-sensors-applet/plugins/libibm-acpi.so
+%attr(755,root,root) %{_libdir}/mate-sensors-applet/plugins/libmbmon.so
 %attr(755,root,root) %{_libdir}/mate-sensors-applet/plugins/libomnibook.so
 %attr(755,root,root) %{_libdir}/mate-sensors-applet/plugins/libpmu-sys.so
 %attr(755,root,root) %{_libdir}/mate-sensors-applet/plugins/libsmu-sys.so
