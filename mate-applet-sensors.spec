@@ -25,7 +25,7 @@ BuildRequires:	glib2-devel >= 1:2.36.0
 %{!?with_gtk3:BuildRequires:	gtk+2-devel >= 2:2.24.0}
 %{?with_gtk3:BuildRequires:	gtk+3-devel >= 3.0.0}
 BuildRequires:	intltool >= 0.50.1
-%{?with_nvidia:BuildRequires:	libXNVCtrl-devel}
+%{?with_nvidia:BuildRequires:	libXNVCtrl-devel >= 256.25}
 BuildRequires:	libatasmart-devel >= 0.16
 BuildRequires:	libnotify-devel >= 0.7.0
 BuildRequires:	libtool >= 1:1.4.3
@@ -37,7 +37,8 @@ BuildRequires:	pkgconfig >= 1:0.19
 BuildRequires:	rpmbuild(find_lang) >= 1.36
 BuildRequires:	rpmbuild(macros) >= 1.592
 BuildRequires:	tar >= 1:1.22
-BuildRequires:	xorg-lib-libX11-devel
+%{?with_nvidia:BuildRequires:	xorg-lib-libX11-devel}
+%{?with_nvidia:BuildRequires:	xorg-lib-libXext-devel}
 BuildRequires:	xz
 BuildRequires:	yelp-tools
 Requires(post,postun):	gtk-update-icon-cache
