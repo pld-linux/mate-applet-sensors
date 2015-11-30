@@ -9,12 +9,12 @@
 Summary:	MATE Sensors Applet
 Summary(pl.UTF-8):	MATE Sensors Applet - aplet z czujnikami dla środowiska MATE
 Name:		mate-applet-sensors
-Version:	1.12.0
+Version:	1.12.1
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications
 Source0:	http://pub.mate-desktop.org/releases/1.12/mate-sensors-applet-%{version}.tar.xz
-# Source0-md5:	5bd2118d8e8ec27c756f32b1e2dea8af
+# Source0-md5:	c9707818a13cc9f4aae468f1745277db
 URL:		https://github.com/mate-desktop/mate-sensors-applet
 BuildRequires:	autoconf >= 2.53
 BuildRequires:	automake >= 1:1.9
