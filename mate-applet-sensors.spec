@@ -9,12 +9,12 @@
 Summary:	MATE Sensors Applet
 Summary(pl.UTF-8):	MATE Sensors Applet - aplet z czujnikami dla środowiska MATE
 Name:		mate-applet-sensors
-Version:	1.12.1
+Version:	1.14.0
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications
-Source0:	http://pub.mate-desktop.org/releases/1.12/mate-sensors-applet-%{version}.tar.xz
-# Source0-md5:	c9707818a13cc9f4aae468f1745277db
+Source0:	http://pub.mate-desktop.org/releases/1.14/mate-sensors-applet-%{version}.tar.xz
+# Source0-md5:	61a310a3106267ab1463e4f014ff7eda
 URL:		https://github.com/mate-desktop/mate-sensors-applet
 BuildRequires:	autoconf >= 2.53
 BuildRequires:	automake >= 1:1.9
@@ -189,6 +189,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/lib*.la
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/mate-sensors-applet/plugins/*.la
+%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/jv
 
 %find_lang mate-sensors-applet --with-mate
 
@@ -221,7 +222,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/dbus-1/services/org.mate.panel.applet.SensorsAppletFactory.service
 %{_datadir}/glib-2.0/schemas/org.mate.sensors-applet.gschema.xml
 %{_datadir}/glib-2.0/schemas/org.mate.sensors-applet.sensor.gschema.xml
-%{_datadir}/mate-panel/applets/org.mate.applets.sensors-applet.mate-panel-applet
+%{_datadir}/mate-panel/applets/org.mate.applets.SensorsApplet.mate-panel-applet
 %{_datadir}/mate-sensors-applet
 %{_iconsdir}/hicolor/48x48/apps/mate-sensors-applet.png
 %{_iconsdir}/hicolor/*x*/devices/mate-sensors-applet-*.png
