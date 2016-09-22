@@ -9,12 +9,12 @@
 Summary:	MATE Sensors Applet
 Summary(pl.UTF-8):	MATE Sensors Applet - aplet z czujnikami dla środowiska MATE
 Name:		mate-applet-sensors
-Version:	1.14.0
+Version:	1.16.0
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications
-Source0:	http://pub.mate-desktop.org/releases/1.14/mate-sensors-applet-%{version}.tar.xz
-# Source0-md5:	61a310a3106267ab1463e4f014ff7eda
+Source0:	http://pub.mate-desktop.org/releases/1.16/mate-sensors-applet-%{version}.tar.xz
+# Source0-md5:	27a49a66dab30328c0bd8723695db7e2
 URL:		https://github.com/mate-desktop/mate-sensors-applet
 BuildRequires:	autoconf >= 2.53
 BuildRequires:	automake >= 1:1.9
@@ -189,7 +189,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/lib*.la
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/mate-sensors-applet/plugins/*.la
-%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/jv
+%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/{frp,jv,pms}
 
 %find_lang mate-sensors-applet --with-mate
 
@@ -206,7 +206,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f mate-sensors-applet.lang
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog NEWS README TODO
+%doc AUTHORS ChangeLog NEWS README
 %attr(755,root,root) %{_libexecdir}/mate-sensors-applet
 %dir %{_libdir}/mate-sensors-applet
 %dir %{_libdir}/mate-sensors-applet/plugins
