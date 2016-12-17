@@ -2,15 +2,17 @@
 # Conditional build:
 %bcond_with	gtk3	# use GTK+ 3.x instead of 2.x
 %bcond_without	nvidia	# NVidia sensors
+%bcond_with	ati	# ATI sensors (requires fglrx driver)
 
 %ifnarch %{ix86} %{x8664}
+%undefine	with_ati
 %undefine	with_nvidia
 %endif
 Summary:	MATE Sensors Applet
 Summary(pl.UTF-8):	MATE Sensors Applet - aplet z czujnikami dla środowiska MATE
 Name:		mate-applet-sensors
 Version:	1.16.0
-Release:	1
+Release:	2
 License:	GPL v2+
 Group:		X11/Applications
 Source0:	http://pub.mate-desktop.org/releases/1.16/mate-sensors-applet-%{version}.tar.xz
@@ -175,7 +177,7 @@ Pliki nagłówkowe do tworzenia wtyczek apletu MATE Sensors.
 %configure \
 	--disable-silent-rules \
 	--disable-static \
-	--with-aticonfig=/usr/bin/aticonfig \
+	%{?with_ati:--with-aticonfig=/usr/bin/aticonfig} \
 	%{?with_gtk3:--with-gtk=3.0} \
 	%{!?with_nvidia:--without-nvidia}
 
@@ -228,7 +230,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_iconsdir}/hicolor/*x*/devices/mate-sensors-applet-*.png
 %{_pixmapsdir}/mate-sensors-applet
 
-%ifarch i586 i686 athlon pentium2 pentium3 pentium4 %{x8664}
+%if %{with ati}
 %files plugin-aticonfig
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/mate-sensors-applet/plugins/libaticonfig.so
