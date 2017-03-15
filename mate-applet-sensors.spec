@@ -1,6 +1,5 @@
 #
 # Conditional build:
-%bcond_with	gtk3	# use GTK+ 3.x instead of 2.x
 %bcond_without	nvidia	# NVidia sensors
 %bcond_with	ati	# ATI sensors (requires fglrx driver)
 
@@ -11,12 +10,12 @@
 Summary:	MATE Sensors Applet
 Summary(pl.UTF-8):	MATE Sensors Applet - aplet z czujnikami dla środowiska MATE
 Name:		mate-applet-sensors
-Version:	1.16.1
+Version:	1.18.0
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications
-Source0:	http://pub.mate-desktop.org/releases/1.16/mate-sensors-applet-%{version}.tar.xz
-# Source0-md5:	0e4fc24ab9d42bae145aeaaa248e00f5
+Source0:	http://pub.mate-desktop.org/releases/1.18/mate-sensors-applet-%{version}.tar.xz
+# Source0-md5:	bab82c8c4a6b9b74a0b43d5be9ae4b38
 URL:		https://github.com/mate-desktop/mate-sensors-applet
 BuildRequires:	autoconf >= 2.53
 BuildRequires:	automake >= 1:1.9
@@ -24,8 +23,7 @@ BuildRequires:	cairo-devel >= 1.0.4
 BuildRequires:	dbus-glib-devel >= 0.80
 BuildRequires:	gettext-tools >= 0.10.40
 BuildRequires:	glib2-devel >= 1:2.36.0
-%{!?with_gtk3:BuildRequires:	gtk+2-devel >= 2:2.24.0}
-%{?with_gtk3:BuildRequires:	gtk+3-devel >= 3.0.0}
+BuildRequires:	gtk+3-devel >= 3.14
 BuildRequires:	intltool >= 0.50.1
 %{?with_nvidia:BuildRequires:	libXNVCtrl-devel >= 256.25}
 BuildRequires:	libatasmart-devel >= 0.16
@@ -34,7 +32,7 @@ BuildRequires:	libtool >= 1:1.4.3
 BuildRequires:	libxslt-progs
 BuildRequires:	lm_sensors-devel
 BuildRequires:	mate-common
-BuildRequires:	mate-panel-devel >= 1.1.0
+BuildRequires:	mate-panel-devel >= 1.17.0
 BuildRequires:	pkgconfig >= 1:0.19
 BuildRequires:	rpmbuild(find_lang) >= 1.36
 BuildRequires:	rpmbuild(macros) >= 1.592
@@ -46,11 +44,10 @@ BuildRequires:	yelp-tools
 Requires(post,postun):	gtk-update-icon-cache
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	cairo >= 1.0.4
-%{!?with_gtk3:Requires:	gtk+2 >= 2:2.24.0}
-%{?with_gtk3:Requires:	gtk+3 >= 3.0.0}
+Requires:	gtk+3 >= 3.14
 Requires:	hicolor-icon-theme
 Requires:	libnotify >= 0.7.0
-Requires:	mate-panel >= 1.1.0
+Requires:	mate-panel >= 1.17.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 # plugin_name symbol comes from plugins
@@ -178,7 +175,6 @@ Pliki nagłówkowe do tworzenia wtyczek apletu MATE Sensors.
 	--disable-silent-rules \
 	--disable-static \
 	%{?with_ati:--with-aticonfig=/usr/bin/aticonfig} \
-	%{?with_gtk3:--with-gtk=3.0} \
 	%{!?with_nvidia:--without-nvidia}
 
 %{__make}
@@ -191,7 +187,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/lib*.la
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/mate-sensors-applet/plugins/*.la
-%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/{frp,jv,pms}
+%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/{frp,ku_IQ,jv,pms}
 
 %find_lang mate-sensors-applet --with-mate
 
