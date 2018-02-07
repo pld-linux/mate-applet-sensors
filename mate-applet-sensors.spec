@@ -10,20 +10,20 @@
 Summary:	MATE Sensors Applet
 Summary(pl.UTF-8):	MATE Sensors Applet - aplet z czujnikami dla środowiska MATE
 Name:		mate-applet-sensors
-Version:	1.18.3
+Version:	1.20.0
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications
-Source0:	http://pub.mate-desktop.org/releases/1.18/mate-sensors-applet-%{version}.tar.xz
-# Source0-md5:	97a2ad4cd7bc6faf2b3329f28bba84df
+Source0:	http://pub.mate-desktop.org/releases/1.20/mate-sensors-applet-%{version}.tar.xz
+# Source0-md5:	b6f6ed18055f7b1c03ed2d02ae12dc10
 URL:		https://github.com/mate-desktop/mate-sensors-applet
 BuildRequires:	autoconf >= 2.53
 BuildRequires:	automake >= 1:1.9
 BuildRequires:	cairo-devel >= 1.0.4
 BuildRequires:	dbus-glib-devel >= 0.80
 BuildRequires:	gettext-tools >= 0.10.40
-BuildRequires:	glib2-devel >= 1:2.36.0
-BuildRequires:	gtk+3-devel >= 3.14
+BuildRequires:	glib2-devel >= 1:2.50.0
+BuildRequires:	gtk+3-devel >= 3.22
 BuildRequires:	intltool >= 0.50.1
 %{?with_nvidia:BuildRequires:	libXNVCtrl-devel >= 256.25}
 BuildRequires:	libatasmart-devel >= 0.16
@@ -44,7 +44,7 @@ BuildRequires:	yelp-tools
 Requires(post,postun):	gtk-update-icon-cache
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	cairo >= 1.0.4
-Requires:	gtk+3 >= 3.14
+Requires:	gtk+3 >= 3.22
 Requires:	hicolor-icon-theme
 Requires:	libnotify >= 0.7.0
 Requires:	mate-panel >= 1.17.0
@@ -140,7 +140,7 @@ odczytanych z ATA S.M.A.R.T. poprzez UDisks.
 Summary:	MATE Sensors Applet library
 Summary(pl.UTF-8):	Biblioteka MATE Sensors Applet
 Group:		Libraries
-Requires:	glib2 >= 1:2.36.0
+Requires:	glib2 >= 1:2.50.0
 
 %description libs
 MATE Sensors Applet library.
@@ -153,7 +153,7 @@ Summary:	Header files for MATE Sensors Applet plugins development
 Summary(pl.UTF-8):	Pliki nagłówkowe do tworzenia wtyczek apletu MATE Sensors
 Group:		Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
-Requires:	glib2-devel >= 1:2.36.0
+Requires:	glib2-devel >= 1:2.50.0
 
 %description devel
 Header files for MATE Sensors Applet plugins development.
@@ -209,7 +209,6 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/mate-sensors-applet
 %dir %{_libdir}/mate-sensors-applet/plugins
 %attr(755,root,root) %{_libdir}/mate-sensors-applet/plugins/libacpi.so
-%attr(755,root,root) %{_libdir}/mate-sensors-applet/plugins/libeee.so
 %attr(755,root,root) %{_libdir}/mate-sensors-applet/plugins/libi8k.so
 %attr(755,root,root) %{_libdir}/mate-sensors-applet/plugins/libibm-acpi.so
 %attr(755,root,root) %{_libdir}/mate-sensors-applet/plugins/libmbmon.so
@@ -248,7 +247,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files plugin-udisks
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/mate-sensors-applet/plugins/libudisks.so
+%attr(755,root,root) %{_libdir}/mate-sensors-applet/plugins/libudisks2.so
 
 %files libs
 %defattr(644,root,root,755)
