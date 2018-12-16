@@ -11,7 +11,7 @@ Summary:	MATE Sensors Applet
 Summary(pl.UTF-8):	MATE Sensors Applet - aplet z czujnikami dla środowiska MATE
 Name:		mate-applet-sensors
 Version:	1.20.2
-Release:	1
+Release:	2
 License:	GPL v2+
 Group:		X11/Applications
 Source0:	http://pub.mate-desktop.org/releases/1.20/mate-sensors-applet-%{version}.tar.xz
@@ -53,7 +53,9 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 # plugin_name symbol comes from plugins
 %define		skip_post_check_so	libmate-sensors-applet-plugin.so.*
 
-%define		_libexecdir	%{_libdir}/mate-panel
+# use the same libexecdir as mate-panel
+# (better solution: store mate-panel libexecdir in libmatepanelapplet-*.pc and read it here)
+%define		matepanel_libexecdir	%{_libexecdir}/mate-panel
 
 %description
 MATE Sensors Applet is an applet for the MATE Panel to display
@@ -172,6 +174,7 @@ Pliki nagłówkowe do tworzenia wtyczek apletu MATE Sensors.
 %{__autoheader}
 %{__automake}
 %configure \
+	--libexecdir=%{matepanel_libexecdir} \
 	--disable-silent-rules \
 	--disable-static \
 	%{?with_ati:--with-aticonfig=/usr/bin/aticonfig} \
@@ -205,7 +208,7 @@ rm -rf $RPM_BUILD_ROOT
 %files -f mate-sensors-applet.lang
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README
-%attr(755,root,root) %{_libexecdir}/mate-sensors-applet
+%attr(755,root,root) %{matepanel_libexecdir}/mate-sensors-applet
 %dir %{_libdir}/mate-sensors-applet
 %dir %{_libdir}/mate-sensors-applet/plugins
 %attr(755,root,root) %{_libdir}/mate-sensors-applet/plugins/libacpi.so
