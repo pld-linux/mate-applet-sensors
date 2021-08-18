@@ -1,21 +1,19 @@
 #
 # Conditional build:
 %bcond_without	nvidia	# NVidia sensors
-%bcond_with	ati	# ATI sensors (requires fglrx driver)
 
 %ifnarch %{ix86} %{x8664}
-%undefine	with_ati
 %undefine	with_nvidia
 %endif
 Summary:	MATE Sensors Applet
 Summary(pl.UTF-8):	MATE Sensors Applet - aplet z czujnikami dla środowiska MATE
 Name:		mate-applet-sensors
-Version:	1.24.1
+Version:	1.26.0
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications
-Source0:	http://pub.mate-desktop.org/releases/1.24/mate-sensors-applet-%{version}.tar.xz
-# Source0-md5:	6d00531d80b6a957a3c8ee24b52d2a47
+Source0:	https://pub.mate-desktop.org/releases/1.26/mate-sensors-applet-%{version}.tar.xz
+# Source0-md5:	6143274d8a051c0c5573163ee343ca4d
 URL:		https://github.com/mate-desktop/mate-sensors-applet
 BuildRequires:	autoconf >= 2.53
 BuildRequires:	automake >= 1:1.9
@@ -47,6 +45,7 @@ Requires:	gtk+3 >= 3.22
 Requires:	hicolor-icon-theme
 Requires:	libnotify >= 0.7.0
 Requires:	mate-panel >= 1.17.0
+Obsoletes:	mate-applet-sensors-plugin-aticonfig < 1.26.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 # plugin_name symbol comes from plugins
@@ -65,19 +64,6 @@ and voltage readings under Linux.
 MATE Sensors Applet to aplet panelu MATE wyświetlający odczyty z
 czujników sprzętowych, w tym temperaturę procesora, prędkość
 wiatraczków oraz odczyty napięcia pod Linuksem.
-
-%package plugin-aticonfig
-Summary:	MATE Sensors Applet plugin to show ATI GPUs temperature
-Summary(pl.UTF-8):	Wtyczka apletu MATE Sensors do pokazywania temperatury GPU ATI
-Group:		Libraries
-Requires:	%{name} = %{version}-%{release}
-Requires:	/usr/bin/aticonfig
-
-%description plugin-aticonfig
-MATE Sensors Applet plugin to show ATI GPUs temperature.
-
-%description plugin-aticonfig -l pl.UTF-8
-Wtyczka apletu MATE Sensors do pokazywania temperatury GPU ATI.
 
 %package plugin-hddtemp
 Summary:	MATE Sensors Applet plugin to show disk temperatures via hddtemp
@@ -175,7 +161,6 @@ Pliki nagłówkowe do tworzenia wtyczek apletu MATE Sensors.
 	--libexecdir=%{matepanel_libexecdir} \
 	--disable-silent-rules \
 	--disable-static \
-	%{?with_ati:--with-aticonfig=/usr/bin/aticonfig} \
 	%{!?with_nvidia:--without-nvidia}
 
 %{__make}
@@ -226,12 +211,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_iconsdir}/hicolor/48x48/apps/mate-sensors-applet.png
 %{_iconsdir}/hicolor/*x*/devices/mate-sensors-applet-*.png
 %{_pixmapsdir}/mate-sensors-applet
-
-%if %{with ati}
-%files plugin-aticonfig
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/mate-sensors-applet/plugins/libaticonfig.so
-%endif
 
 %files plugin-hddtemp
 %defattr(644,root,root,755)
